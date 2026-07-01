@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, jsonify
 
-from backend.lexer import tokenize
-from backend.parser import parse
-from backend.ast_generator import generate_ast
-from backend.semantic import semantic_analysis
-from backend.symbol_table import generate_symbol_table
+from lexer import tokenize
+from parser import parse
+from ast_generator import generate_ast
+from semantic import semantic_analysis
+from symbol_table import generate_symbol_table
 
 import os
 
