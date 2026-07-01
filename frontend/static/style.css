@@ -1,0 +1,518 @@
+/* ===========================
+   COMPILER FRONT-END DASHBOARD
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+body{
+
+    background:#0d1117;
+    color:#ffffff;
+
+}
+
+.container{
+
+    width:95%;
+    max-width:1500px;
+
+    margin:30px auto;
+
+}
+
+/* ================= HEADER ================= */
+
+header{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+header h1{
+
+    font-size:40px;
+
+    color:#58a6ff;
+
+    margin-bottom:10px;
+
+}
+
+header p{
+
+    color:#b8c0cc;
+
+}
+
+/* ================= PANELS ================= */
+
+.panel,
+.editor-card{
+
+    background:#161b22;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.35);
+
+}
+
+.panel h2,
+.editor-card h2{
+
+    color:#58a6ff;
+
+    margin-bottom:20px;
+
+}
+
+/* ================= EDITOR ================= */
+
+textarea{
+
+    width:100%;
+
+    height:260px;
+
+    background:#0d1117;
+
+    color:#7ee787;
+
+    border:1px solid #30363d;
+
+    border-radius:10px;
+
+    padding:20px;
+
+    resize:none;
+
+    font-size:17px;
+
+    outline:none;
+
+}
+
+/* ================= BUTTONS ================= */
+
+.button-group{
+
+    margin-top:20px;
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+button{
+
+    background:#238636;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:12px 24px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#2ea043;
+
+    transform:translateY(-2px);
+
+}
+/* ================= STATISTICS ================= */
+
+.stats-grid{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-bottom:25px;
+
+}
+
+.card{
+
+    background:#21262d;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    border-left:5px solid #58a6ff;
+    transition:0.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-5px);
+    box-shadow:0 10px 20px rgba(0,0,0,.4);
+
+}
+
+.card h3{
+
+    color:#8b949e;
+    margin-bottom:10px;
+
+}
+
+.card h1{
+
+    font-size:38px;
+    color:#58a6ff;
+
+}
+
+/* ================= PHASES ================= */
+
+.phase-grid{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+
+}
+
+.phase{
+
+    background:#21262d;
+    padding:18px;
+    border-radius:10px;
+    text-align:center;
+    border-left:5px solid #238636;
+
+}
+
+.phase h3{
+
+    margin-bottom:8px;
+
+}
+
+.success{
+
+    color:#3fb950;
+    font-weight:bold;
+
+}
+
+.failed{
+
+    color:#f85149;
+    font-weight:bold;
+
+}
+
+/* ================= TABLES ================= */
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:10px;
+
+}
+
+thead{
+
+    background:#58a6ff;
+    color:white;
+
+}
+
+th{
+
+    padding:15px;
+    text-align:left;
+
+}
+
+td{
+
+    padding:12px;
+    border-bottom:1px solid #30363d;
+
+}
+
+tbody tr{
+
+    background:#161b22;
+    transition:.3s;
+
+}
+
+tbody tr:hover{
+
+    background:#21262d;
+
+}
+
+/* ================= CONSOLE ================= */
+
+.console{
+
+    background:#0d1117;
+    color:#7ee787;
+    border-radius:10px;
+    padding:20px;
+    font-family:Consolas,monospace;
+    min-height:180px;
+    white-space:pre-line;
+    border:1px solid #30363d;
+
+}
+
+/* ================= AST ================= */
+
+#treeContainer{
+
+    width:100%;
+    height:700px;
+    background:#0d1117;
+    border-radius:12px;
+    overflow:hidden;
+    border:1px solid #30363d;
+
+}
+
+#treeSvg{
+
+    width:100%;
+    height:100%;
+
+}
+
+/* ================= SCROLLBAR ================= */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#0d1117;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#58a6ff;
+    border-radius:10px;
+
+}
+/* ================= BADGES ================= */
+
+.badge-success{
+
+    background:#238636;
+    color:white;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+
+}
+
+.badge-failed{
+
+    background:#da3633;
+    color:white;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+
+}
+
+/* ================= TREE ================= */
+
+.node circle{
+
+    fill:#58a6ff;
+    stroke:#ffffff;
+    stroke-width:2px;
+    transition:.3s;
+
+}
+
+.node circle:hover{
+
+    fill:#3fb950;
+    r:18;
+
+}
+
+.node text{
+
+    fill:#ffffff;
+    font-size:15px;
+    font-weight:500;
+
+}
+
+.link{
+
+    fill:none;
+    stroke:#8b949e;
+    stroke-width:2px;
+
+}
+
+/* ================= FADE ANIMATION ================= */
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
+
+.panel,
+.editor-card,
+.card{
+
+    animation:fadeIn .6s ease;
+
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1000px){
+
+.stats-grid{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+.phase-grid{
+
+grid-template-columns:1fr;
+
+}
+
+textarea{
+
+height:220px;
+
+}
+
+#treeContainer{
+
+height:500px;
+
+}
+
+}
+
+@media(max-width:700px){
+
+.container{
+
+width:98%;
+
+}
+
+header h1{
+
+font-size:28px;
+
+}
+
+.button-group{
+
+flex-direction:column;
+
+}
+
+button{
+
+width:100%;
+
+}
+
+.stats-grid{
+
+grid-template-columns:1fr;
+
+}
+
+table{
+
+font-size:13px;
+
+display:block;
+overflow-x:auto;
+
+}
+
+th,
+td{
+
+padding:10px;
+
+}
+
+#treeContainer{
+
+height:400px;
+
+}
+
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+
+margin-top:40px;
+padding:20px;
+text-align:center;
+color:#8b949e;
+font-size:14px;
+
+}
+
+.footer strong{
+
+color:#58a6ff;
+
+}

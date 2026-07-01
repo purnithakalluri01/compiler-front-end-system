@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compiler Front-End Dashboard</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+
+        <h1>⚙ Compiler Front-End Dashboard</h1>
+
+        <p>
+            Lexical Analysis • Syntax Analysis • Semantic Analysis •
+            Symbol Table • AST Visualization
+        </p>
+
+    </header>
+
+    <!-- ================= SOURCE CODE ================= -->
+
+    <section class="editor-card">
+
+        <h2>📝 Source Code Editor</h2>
+
+        <textarea id="code" spellcheck="false">
+
+int a = 10;
+int b = 20;
+int c = a + b;
+
+        </textarea>
+
+        <div class="button-group">
+
+            <button onclick="compileCode()">
+                ▶ Compile Code
+            </button>
+
+            <button onclick="clearEditor()">
+                🗑 Clear
+            </button>
+
+            <button onclick="downloadReport()">
+                📄 Download Report
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- ================= STATS ================= -->
+
+    <section class="stats-grid">
+
+        <div class="card">
+
+            <h3>Total Tokens</h3>
+
+            <h1 id="totalTokens">0</h1>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Identifiers</h3>
+
+            <h1 id="identifiers">0</h1>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Operators</h3>
+
+            <h1 id="operators">0</h1>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Errors</h3>
+
+            <h1 id="errors">0</h1>
+
+        </div>
+
+    </section>
+
+    <!-- ================= COMPILER PHASES ================= -->
+
+    <section class="panel">
+
+        <h2>⚙ Compiler Phases</h2>
+
+        <div id="phases" class="phase-grid">
+
+        </div>
+
+    </section>
+
+    <!-- ================= TOKEN TABLE ================= -->
+
+    <section class="panel">
+
+        <h2>📋 Token Table</h2>
+
+        <table>
+
+            <thead>
+
+            <tr>
+
+                <th>No</th>
+
+                <th>Type</th>
+
+                <th>Lexeme</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody id="tokenTable">
+
+            </tbody>
+
+        </table>
+
+    </section>
+        <!-- ================= SYMBOL TABLE ================= -->
+
+    <section class="panel">
+
+        <h2>📑 Symbol Table</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Identifier</th>
+                    <th>Type</th>
+                    <th>Value</th>
+                    <th>Scope</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="symbolTable">
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+    <!-- ================= CONSOLE ================= -->
+
+    <section class="panel">
+
+        <h2>💻 Compiler Console</h2>
+
+        <div id="console" class="console">
+
+            Waiting for compilation...
+
+        </div>
+
+    </section>
+
+    <!-- ================= AST ================= -->
+
+    <section class="panel">
+
+        <h2>🌳 Abstract Syntax Tree (AST)</h2>
+
+        <div id="treeContainer">
+
+            <svg id="treeSvg"></svg>
+
+        </div>
+
+    </section>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
