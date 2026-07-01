@@ -18,6 +18,7 @@ An interactive Compiler Front-End system that simulates the complete compilation
 int a = 10;
 int b = 20;
 int c = a + b;
+
 ❌ Error Test Cases
 1. Undeclared Variable
 b = a + 5;
